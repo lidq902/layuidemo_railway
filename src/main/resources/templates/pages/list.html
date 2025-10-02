@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="userList">
+  <div class="content-card">
+    <div style="padding: 20px;">
+      <h2>用户管理</h2>
+
+      <!-- 搜索区域 -->
+      <div class="layui-card">
+        <div class="layui-card-header">搜索条件</div>
+        <div class="layui-card-body">
+          <form class="layui-form">
+            <div class="layui-row layui-col-space15">
+              <div class="layui-col-md3">
+                <input type="text" name="username" placeholder="请输入用户名" class="layui-input">
+              </div>
+              <div class="layui-col-md3">
+                <button type="button" class="layui-btn layui-btn-normal" onclick="searchUsers()">
+                  <i class="layui-icon">&#xe615;</i> 搜索
+                </button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- 表格区域 -->
+      <div class="layui-card">
+        <div class="layui-card-header">
+          <button class="layui-btn layui-btn-normal" onclick="addUser()">
+            <i class="layui-icon">&#xe654;</i> 添加用户
+          </button>
+        </div>
+        <div class="layui-card-body">
+          <table class="layui-table">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>用户名</th>
+              <th>邮箱</th>
+              <th>姓名</th>
+              <th>角色</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+              <td th:text="${user.userid}">1</td>
+              <td th:text="${user.username}">admin</td>
+              <td th:text="${user.email}">admin@example.com</td>
+              <td th:text="${user.realname}">zhangsan</td>
+              <td th:text="${user.rolename}">管理员</td>
+              <td>
+                <button class="layui-btn layui-btn-xs" onclick="editUser([[${user.id}]])">
+                  编辑
+                </button>
+                <button class="layui-btn layui-btn-xs layui-btn-danger"
+                        onclick="deleteUser([[${user.id}]])">
+                  删除
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function searchUsers() {
+      layui.use('layer', function(){
+        var layer = layui.layer;
+        layer.msg('搜索功能开发中...');
+      });
+    }
+
+    function addUser() {
+      // 打开添加用户页面
+      var tabManager = window.tabManager;
+      tabManager.addTab('添加用户', '/user/form', 'user_form');
+    }
+
+    function editUser(id) {
+      layui.use('layer', function(){
+        var layer = layui.layer;
+        layer.msg('编辑用户: ' + id);
+      });
+    }
+
+    function deleteUser(id) {
+      layui.use(['layer', 'jquery'], function(){
+        var layer = layui.layer;
+        var $ = layui.$;
+
+        layer.confirm('确定删除这个用户吗？', function(index){
+          // AJAX 删除操作
+          $.ajax({
+            url: '/user/delete/' + id,
+            type: 'POST',
+            success: function(result) {
+              layer.msg('删除成功');
+              // 刷新当前页面
+              window.tabManager.refreshCurrent();
+            },
+            error: function() {
+              layer.msg('删除失败');
+            }
+          });
+          layer.close(index);
+        });
+      });
+    }
+  </script>
+</div>

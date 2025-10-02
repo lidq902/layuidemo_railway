@@ -1,0 +1,10 @@
+[build]
+builder = "maven"
+
+[deploy]
+healthCheckPath = "/"
+healthCheckTimeout = 300
+startCommand = "java -jar target/*.jar"
+
+[build.environment]
+JAVA_VERSION = "8"

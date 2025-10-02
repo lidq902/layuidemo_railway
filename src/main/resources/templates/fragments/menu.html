@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="menu">
+  <div class="logo">管理系统</div>
+  <ul class="layui-nav layui-nav-tree" lay-filter="side-nav">
+    <!-- 系统管理 -->
+    <li class="layui-nav-item layui-nav-itemed">
+      <a href="javascript:;">系统管理</a>
+      <dl class="layui-nav-child">
+        <dd>
+          <a href="javascript:;" class="menu-item"
+             data-url="/user/list"
+             data-title="用户管理">用户管理</a>
+        </dd>
+        <dd>
+          <a href="javascript:;" class="menu-item"
+             data-url="/role/list"
+             data-title="角色管理">角色管理</a>
+        </dd>
+        <dd>
+          <a href="javascript:;" class="menu-item"
+             data-url="/menu/list"
+             data-title="菜单管理">菜单管理</a>
+        </dd>
+      </dl>
+    </li>
+
+    <!-- 教学管理 -->
+    <li class="layui-nav-item">
+      <a href="javascript:;">教学管理</a>
+      <dl class="layui-nav-child">
+        <dd>
+          <a href="javascript:;" class="menu-item"
+             data-url="/article/list"
+             data-title="文章管理">学科管理</a>
+        </dd>
+        <dd>
+          <a href="javascript:;" class="menu-item"
+             data-url="/category/list"
+             data-title="分类管理">成绩管理</a>
+        </dd>
+      </dl>
+    </li>
+
+    <!-- 单菜单项 -->
+    <li class="layui-nav-item">
+      <a href="javascript:;" class="menu-item"
+         data-url="/dashboard"
+         data-title="数据统计">数据统计</a>
+    </li>
+
+    <li class="layui-nav-item">
+      <a href="javascript:;" class="menu-item"
+         data-url="/system/settings"
+         data-title="系统设置">系统设置</a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header">
+  <div class="layout-header">
+    <div class="layui-fluid">
+      <div class="layui-row">
+        <div class="layui-col-md6">
+          <h2>Spring Boot 学校管理系统</h2>
+        </div>
+        <div class="layui-col-md6" style="text-align: right;">
+<!--          <span>欢迎，<span th:text="${#authentication?.name ?: '游客'}">用户</span></span>-->
+          <span>欢迎，<span th:text="${user.username?: '游客'}">用户</span></span>
+          <a href="/logout" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-left: 10px;">退出</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

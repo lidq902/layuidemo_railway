@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.layuidemo.dao.UserDao">
+    <resultMap id="userMap" type="User">
+        <id column="user_id" property="userid"/>
+        <result column="username" property="username"/>
+        <result column="real_name" property="realname"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+        <result column="role_name" property="rolename"/>
+    </resultMap>
+
+    <select id="getUserByUsername" resultMap="userMap">
+        SELECT u.user_id,u.username, u.real_name, u.password,u.email,r.role_name
+        FROM user u
+                 JOIN user_role ur ON u.user_id = ur.user_id
+                 JOIN role r ON ur.role_id = r.role_id
+        where u.username = #{username}
+    </select>
+
+</mapper>
