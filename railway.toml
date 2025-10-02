@@ -1,10 +1,13 @@
+# railway.toml
+
 [build]
-builder = "maven"
+builder = "NIXPACKS"
+
+[build.args]
+JAVA_VERSION = "8"
 
 [deploy]
-healthCheckPath = "/"
-healthCheckTimeout = 300
-startCommand = "java -jar target/*.jar"
+startCommand = "java -Dserver.port=$PORT -jar target/*.jar"
 
-[build.environment]
-JAVA_VERSION = "8"
+[variables]
+JAVA_HOME = "/usr/lib/jvm/java-8-openjdk"
